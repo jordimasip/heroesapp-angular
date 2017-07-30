@@ -19,7 +19,6 @@ export class HeroesService {
 
     return this.http.post( this.heroesURL, body, { headers } )
             .map( res => {
-              console.log(res.json());
               return res.json();
             })
   }
@@ -34,9 +33,27 @@ export class HeroesService {
 
     return this.http.put( url, body, { headers } )
             .map( res => {
-              console.log(res.json());
               return res.json();
             })
   }
 
+  getHeroe(key$:string) {
+
+    let url = `${this.heroeURL}/${key$}.json`
+
+    return this.http.get( url )
+            .map( res => res.json());
+  }
+
+  getHeroes() {
+
+    return this.http.get( this.heroesURL )
+            .map( res => res.json());
+  }
+
+  borrarHeroe(key$:string) {
+    let url = `${this.heroeURL}/${key$}.json`;
+    return this.http.delete(url)
+          .map(res => res.json());
+  }
 }
